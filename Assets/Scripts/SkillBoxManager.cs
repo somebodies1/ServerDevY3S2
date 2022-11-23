@@ -59,7 +59,7 @@ public class SkillBoxManager : MonoBehaviour
 
     public void BackToMainScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LoginScn");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LoginScene");
     }
 }
 

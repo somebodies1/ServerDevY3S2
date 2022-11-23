@@ -6,15 +6,32 @@ using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
-    
-
     [SerializeField] TMP_InputField userEmail, userName, userPassword, displayName;
     [SerializeField] Button loginButtonUsername, registerButton, updateDisplayNameButton;
     [SerializeField] TextMeshProUGUI Msg;
 
+    public GameObject toLoginUIButton, toRegisterUIButton;
+
+    private void Start()
+    {
+        SwitchToLogin();
+    }
+
     public void DisableAllUI()
     {
+        userEmail.gameObject.SetActive(false);
+        userName.gameObject.SetActive(false);
+        userPassword.gameObject.SetActive(false);
+        displayName.gameObject.SetActive(false);
 
+        loginButtonUsername.gameObject.SetActive(false);
+        registerButton.gameObject.SetActive(false);
+        updateDisplayNameButton.gameObject.SetActive(false);
+
+        Msg.gameObject.SetActive(false);
+
+        toLoginUIButton.SetActive(false);
+        toRegisterUIButton.SetActive(false);
     }
 
     public void SwitchToLogin()
@@ -25,10 +42,25 @@ public class LoginUI : MonoBehaviour
         userPassword.gameObject.SetActive(true);
 
         loginButtonUsername.gameObject.SetActive(true);
+
+        Msg.gameObject.SetActive(true);
+
+        toRegisterUIButton.SetActive(true);
     }
 
     public void SwitchToRegister()
     {
+        DisableAllUI();
 
+        userEmail.gameObject.SetActive(true);
+        userName.gameObject.SetActive(true);
+        userPassword.gameObject.SetActive(true);
+        displayName.gameObject.SetActive(true);
+
+        registerButton.gameObject.SetActive(true);
+
+        Msg.gameObject.SetActive(true);
+
+        toLoginUIButton.SetActive(true);
     }
 }
