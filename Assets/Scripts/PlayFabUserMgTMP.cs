@@ -56,6 +56,7 @@ public class PlayFabUserMgTMP : MonoBehaviour
     void OnLoginSuccess(LoginResult r)
     {
         UpdateMsg("Login success!" + r.PlayFabId + r.InfoResultPayload.PlayerProfile.DisplayName);
+        //GoToScene("Landing");
     }
 
     //Login using email and password
