@@ -19,7 +19,7 @@ public class FriendManager : MonoBehaviour
         {
             Debug.Log(f.FriendPlayFabId + "," + f.TitleDisplayName);
             friendListText.text += f.TitleDisplayName + "\n";
-            if (f.Profile == null)
+            if (f.Profile != null)
             {
                 Debug.Log(f.FriendPlayFabId + "/" + f.Profile.DisplayName);
             }
@@ -137,5 +137,11 @@ public class FriendManager : MonoBehaviour
                 }
             },
             DisplayPlayFabError);
+    }
+
+    //Scene changer
+    public void GoToScene(string sceneName)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }
