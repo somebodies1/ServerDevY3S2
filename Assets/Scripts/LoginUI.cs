@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
-    [SerializeField] TMP_InputField userEmail, userName, userPassword, displayName;
-    [SerializeField] Button loginButtonUsername, registerButton, updateDisplayNameButton;
+    [SerializeField] TMP_InputField userEmail, userName, userPassword, userPasswordMatch, displayName;
+    [SerializeField] Button loginButtonUsername, registerButton;
     [SerializeField] TextMeshProUGUI Msg;
 
     public GameObject toLoginUIButton, toRegisterUIButton;
@@ -22,11 +22,11 @@ public class LoginUI : MonoBehaviour
         userEmail.gameObject.SetActive(false);
         userName.gameObject.SetActive(false);
         userPassword.gameObject.SetActive(false);
+        userPasswordMatch.gameObject.SetActive(false);
         displayName.gameObject.SetActive(false);
 
         loginButtonUsername.gameObject.SetActive(false);
         registerButton.gameObject.SetActive(false);
-        updateDisplayNameButton.gameObject.SetActive(false);
 
         Msg.gameObject.SetActive(false);
 
@@ -55,6 +55,7 @@ public class LoginUI : MonoBehaviour
         userEmail.gameObject.SetActive(true);
         userName.gameObject.SetActive(true);
         userPassword.gameObject.SetActive(true);
+        userPasswordMatch.gameObject.SetActive(true);
         displayName.gameObject.SetActive(true);
 
         registerButton.gameObject.SetActive(true);

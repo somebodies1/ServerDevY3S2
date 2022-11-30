@@ -7,7 +7,7 @@ using PlayFab.ClientModels;
 
 public class PlayFabUserMgTMP : MonoBehaviour
 {
-    [SerializeField] TMP_InputField userEmail, userPassword, userName, currentScore, displayName, XP, level;
+    [SerializeField] TMP_InputField userEmail, userPassword, userPasswordMatch, userName, currentScore, displayName, XP, level;
     [SerializeField] TextMeshProUGUI Msg;
 
     //to display in console and messagebox
@@ -35,10 +35,30 @@ public class PlayFabUserMgTMP : MonoBehaviour
 
         //Update profile
         PlayFabClientAPI.UpdateUserTitleDisplayName(req, OnDisplayNameUpdate, OnError);
+
+        GoToScene("LoggedInScene");
+    }
+
+    public void OnButtonDisplayNameUpdate()
+    {
+        //Create player display name
+        var req = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = displayName.text
+        };
+
+        //Update profile
+        PlayFabClientAPI.UpdateUserTitleDisplayName(req, OnDisplayNameUpdate, OnError);
     }
 
     public void OnButtonRegUser()
     {
+        if (userPassword.text != userPasswordMatch.text)
+        {
+            UpdateMsg("Password does not match!");
+            return;
+        }
+
         var registerRequest = new RegisterPlayFabUserRequest
         {
             Email = userEmail.text,
@@ -56,7 +76,7 @@ public class PlayFabUserMgTMP : MonoBehaviour
     void OnLoginSuccess(LoginResult r)
     {
         UpdateMsg("Login success!" + r.PlayFabId + r.InfoResultPayload.PlayerProfile.DisplayName);
-        //GoToScene("Landing");
+        GoToScene("LoggedInScene");
     }
 
     //Login using email and password
@@ -99,6 +119,7 @@ public class PlayFabUserMgTMP : MonoBehaviour
     {
         PlayFabClientAPI.ForgetAllCredentials();
         UpdateMsg("Logged out!");
+        GoToScene("LoginScene");
     }
 
     public void OnButtonGetLeaderboard()

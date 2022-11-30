@@ -6,6 +6,8 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
+    public LeaderboardManager leaderboardManager;
+
     public static GameController instance = null;
     public GameObject gameOverObject;
     
@@ -33,20 +35,12 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        LoadHighScore();
         scoreText.text = "0";
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        LoadHighScore();
     }
 
     public void ResetGame()
@@ -64,6 +58,12 @@ public class GameController : MonoBehaviour
     {
         gameOverObject.SetActive(true);
         isGameOver = true;
+
+        if (score >= highestScore)
+        {
+            leaderboardManager.currentScore = score;
+            leaderboardManager.OnButtonSendLeaderboard();
+        }
     }
 
     public void Scored(int value)
@@ -84,16 +84,19 @@ public class GameController : MonoBehaviour
     private void SaveHighScore(int score)
     {
         highestScore = score;
-        PlayerPrefs.SetInt("highestScore", highestScore);
+        //PlayerPrefs.SetInt("highestScore", highestScore);
         highScoreText.text = highestScore.ToString();
     }
 
     private void LoadHighScore()
     {
-        if(PlayerPrefs.HasKey("highestScore"))
-        {
-            highestScore = PlayerPrefs.GetInt("highestScore");
-            highScoreText.text = highestScore.ToString();
-        }
+        //if(PlayerPrefs.HasKey("highestScore"))
+        //{
+        //    highestScore = PlayerPrefs.GetInt("highestScore");
+        //    highScoreText.text = highestScore.ToString();
+        //}
+
+        highestScore = leaderboardManager.highScore;
+        highScoreText.text = highestScore.ToString();
     }
 }

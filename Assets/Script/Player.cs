@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviourPunCallbacks
 {
+    public LeaderboardManager leaderboardManager;
+
     private float moveSpeed = 7.0f;
     private bool canMove = true;
 
@@ -81,6 +83,7 @@ public class Player : MonoBehaviourPunCallbacks
 
                         case CONTACT_TYPE.LEADERBOARD:
                             leaderPanel.GetComponent<LeaderboardController>().OpenPanel(ClosePanel);
+                            leaderboardManager.OnButtonGetLeaderboard();
                             break;
 
                         case CONTACT_TYPE.GUILD:
