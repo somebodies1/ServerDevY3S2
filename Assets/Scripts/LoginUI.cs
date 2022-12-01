@@ -6,62 +6,108 @@ using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
-    [SerializeField] TMP_InputField userEmail, userName, userPassword, userPasswordMatch, displayName;
-    [SerializeField] Button loginButtonUsername, registerButton;
-    [SerializeField] TextMeshProUGUI Msg;
+    [SerializeField]
+    GameObject userEmailInput, userNameInput, userPasswordInput, userPasswordMatchInput, displayNameInput, //Input fields
+                                loginButtonUsername, registerButton, //Buttons
+                                Msg,    //Text message
+                                toLoginUIButton, toRegisterUIButton; //UI changing buttons
 
-    public GameObject toLoginUIButton, toRegisterUIButton;
+
+    //[SerializeField] TMP_InputField userEmail, userName, userPassword, userPasswordMatch, displayName;
+    //[SerializeField] Button loginButtonUsername, registerButton;
+    //[SerializeField] TextMeshProUGUI Msg;
 
     private void Start()
     {
         SwitchToLogin();
     }
 
+    void SetGameObjectActiveIfExist(GameObject _go, bool _active = true)
+    {
+        if (_go)
+            _go.SetActive(_active);
+    }
+
     public void DisableAllUI()
     {
-        userEmail.gameObject.SetActive(false);
-        userName.gameObject.SetActive(false);
-        userPassword.gameObject.SetActive(false);
-        userPasswordMatch.gameObject.SetActive(false);
-        displayName.gameObject.SetActive(false);
+        SetGameObjectActiveIfExist(userEmailInput, false);
+        SetGameObjectActiveIfExist(userNameInput, false);
+        SetGameObjectActiveIfExist(userPasswordInput, false);
+        SetGameObjectActiveIfExist(userPasswordMatchInput, false);
+        SetGameObjectActiveIfExist(displayNameInput, false);
 
-        loginButtonUsername.gameObject.SetActive(false);
-        registerButton.gameObject.SetActive(false);
+        SetGameObjectActiveIfExist(loginButtonUsername, false);
+        SetGameObjectActiveIfExist(registerButton, false);
 
-        Msg.gameObject.SetActive(false);
+        SetGameObjectActiveIfExist(Msg, false);
 
-        toLoginUIButton.SetActive(false);
-        toRegisterUIButton.SetActive(false);
+        SetGameObjectActiveIfExist(toLoginUIButton, false);
+        SetGameObjectActiveIfExist(toRegisterUIButton, false);
+
+        //userEmail.gameObject.SetActive(false);
+        //userName.gameObject.SetActive(false);
+        //userPassword.gameObject.SetActive(false);
+        //userPasswordMatch.gameObject.SetActive(false);
+        //displayName.gameObject.SetActive(false);
+
+        //loginButtonUsername.gameObject.SetActive(false);
+        //registerButton.gameObject.SetActive(false);
+
+        //Msg.gameObject.SetActive(false);
+
+        //toLoginUIButton.SetActive(false);
+        //toRegisterUIButton.SetActive(false);
     }
 
     public void SwitchToLogin()
     {
         DisableAllUI();
 
-        userName.gameObject.SetActive(true);
-        userPassword.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(userNameInput);
+        SetGameObjectActiveIfExist(userPasswordInput);
 
-        loginButtonUsername.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(loginButtonUsername);
 
-        Msg.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(Msg);
 
-        toRegisterUIButton.SetActive(true);
+        SetGameObjectActiveIfExist(toRegisterUIButton);
+
+        //userName.gameObject.SetActive(true);
+        //userPassword.gameObject.SetActive(true);
+
+        //loginButtonUsername.gameObject.SetActive(true);
+
+        //Msg.gameObject.SetActive(true);
+
+        //toRegisterUIButton.SetActive(true);
     }
 
     public void SwitchToRegister()
     {
         DisableAllUI();
 
-        userEmail.gameObject.SetActive(true);
-        userName.gameObject.SetActive(true);
-        userPassword.gameObject.SetActive(true);
-        userPasswordMatch.gameObject.SetActive(true);
-        displayName.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(userEmailInput);
+        SetGameObjectActiveIfExist(userNameInput);
+        SetGameObjectActiveIfExist(userPasswordInput);
+        SetGameObjectActiveIfExist(userPasswordMatchInput);
+        SetGameObjectActiveIfExist(displayNameInput);
 
-        registerButton.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(registerButton);
 
-        Msg.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(Msg);
 
-        toLoginUIButton.SetActive(true);
+        SetGameObjectActiveIfExist(toLoginUIButton);
+
+        //userEmail.gameObject.SetActive(true);
+        //userName.gameObject.SetActive(true);
+        //userPassword.gameObject.SetActive(true);
+        //userPasswordMatch.gameObject.SetActive(true);
+        //displayName.gameObject.SetActive(true);
+
+        //registerButton.gameObject.SetActive(true);
+
+        //Msg.gameObject.SetActive(true);
+
+        //toLoginUIButton.SetActive(true);
     }
 }
