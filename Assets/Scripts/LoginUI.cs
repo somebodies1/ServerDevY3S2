@@ -8,9 +8,9 @@ public class LoginUI : MonoBehaviour
 {
     [SerializeField]
     GameObject userEmailInput, userNameInput, userPasswordInput, userPasswordMatchInput, displayNameInput, //Input fields
-                                loginButtonUsername, registerButton, //Buttons
+                                loginButtonUsername, registerButton, sendRecoveryEmailButton, //Buttons
                                 Msg,    //Text message
-                                toLoginUIButton, toRegisterUIButton; //UI changing buttons
+                                toLoginUIButton, toRegisterUIButton, toForgotPasswordUIButton; //UI changing buttons
 
 
     //[SerializeField] TMP_InputField userEmail, userName, userPassword, userPasswordMatch, displayName;
@@ -38,25 +38,13 @@ public class LoginUI : MonoBehaviour
 
         SetGameObjectActiveIfExist(loginButtonUsername, false);
         SetGameObjectActiveIfExist(registerButton, false);
+        SetGameObjectActiveIfExist(sendRecoveryEmailButton, false);
 
         SetGameObjectActiveIfExist(Msg, false);
 
         SetGameObjectActiveIfExist(toLoginUIButton, false);
         SetGameObjectActiveIfExist(toRegisterUIButton, false);
-
-        //userEmail.gameObject.SetActive(false);
-        //userName.gameObject.SetActive(false);
-        //userPassword.gameObject.SetActive(false);
-        //userPasswordMatch.gameObject.SetActive(false);
-        //displayName.gameObject.SetActive(false);
-
-        //loginButtonUsername.gameObject.SetActive(false);
-        //registerButton.gameObject.SetActive(false);
-
-        //Msg.gameObject.SetActive(false);
-
-        //toLoginUIButton.SetActive(false);
-        //toRegisterUIButton.SetActive(false);
+        SetGameObjectActiveIfExist(toForgotPasswordUIButton, false);
     }
 
     public void SwitchToLogin()
@@ -71,15 +59,7 @@ public class LoginUI : MonoBehaviour
         SetGameObjectActiveIfExist(Msg);
 
         SetGameObjectActiveIfExist(toRegisterUIButton);
-
-        //userName.gameObject.SetActive(true);
-        //userPassword.gameObject.SetActive(true);
-
-        //loginButtonUsername.gameObject.SetActive(true);
-
-        //Msg.gameObject.SetActive(true);
-
-        //toRegisterUIButton.SetActive(true);
+        SetGameObjectActiveIfExist(toForgotPasswordUIButton);
     }
 
     public void SwitchToRegister()
@@ -97,17 +77,18 @@ public class LoginUI : MonoBehaviour
         SetGameObjectActiveIfExist(Msg);
 
         SetGameObjectActiveIfExist(toLoginUIButton);
+    }
 
-        //userEmail.gameObject.SetActive(true);
-        //userName.gameObject.SetActive(true);
-        //userPassword.gameObject.SetActive(true);
-        //userPasswordMatch.gameObject.SetActive(true);
-        //displayName.gameObject.SetActive(true);
+    public void SwitchToForgotPassword()
+    {
+        DisableAllUI();
 
-        //registerButton.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(userEmailInput);
 
-        //Msg.gameObject.SetActive(true);
+        SetGameObjectActiveIfExist(sendRecoveryEmailButton);
 
-        //toLoginUIButton.SetActive(true);
+        SetGameObjectActiveIfExist(Msg);
+
+        SetGameObjectActiveIfExist(toLoginUIButton);
     }
 }

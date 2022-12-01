@@ -237,4 +237,20 @@ public class PlayFabUserMgTMP : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
+
+    public void OnButtonResetPassword()
+    {
+        var req = new SendAccountRecoveryEmailRequest
+        {
+            Email = userEmail.text,
+            TitleId = "D7C8A"
+        };
+
+        PlayFabClientAPI.SendAccountRecoveryEmail(req, OnResetPassword, OnError);
+    }
+
+    void OnResetPassword(SendAccountRecoveryEmailResult r)
+    {
+        UpdateMsg("Password recovery email sent!");
+    }
 }
