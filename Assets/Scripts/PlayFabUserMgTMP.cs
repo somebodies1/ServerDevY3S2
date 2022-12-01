@@ -253,4 +253,22 @@ public class PlayFabUserMgTMP : MonoBehaviour
     {
         UpdateMsg("Password recovery email sent!");
     }
+
+    public void OnButtonGuestLogin()
+    {
+        var req = new LoginWithCustomIDRequest
+        {
+            TitleId = "D7C8A",
+            CreateAccount = true,
+            CustomId = "Guest1",
+        };
+
+        PlayFabClientAPI.LoginWithCustomID(req, OnGuestLogin, OnError);
+    }
+
+    void OnGuestLogin(LoginResult r)
+    {
+        UpdateMsg("Logged in as Guest");
+        GoToScene("LoggedInScene");
+    }
 }
