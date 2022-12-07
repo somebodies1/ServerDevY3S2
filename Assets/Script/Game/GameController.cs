@@ -41,11 +41,6 @@ public class GameController : MonoBehaviour
         scoreText.text = "0";
     }
 
-    private void Start()
-    {
-        LoadHighScore();
-    }
-
     public void ResetGame()
     {
         //Reset the scene
@@ -59,11 +54,17 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        if (isGameOver)
+            return;
+
         gameOverObject.SetActive(true);
         isGameOver = true;
 
         LoadItem();
-        score += additionalScore;
+
+        if (score >= 1)
+            score += additionalScore;
+
         gameOverScoreText.text = score.ToString();
 
         if (score >= highestScore)
@@ -97,7 +98,7 @@ public class GameController : MonoBehaviour
         highScoreText.text = highestScore.ToString();
     }
 
-    private void LoadHighScore()
+    public void LoadHighScore()
     {
         //if(PlayerPrefs.HasKey("highestScore"))
         //{
