@@ -7,6 +7,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     public LeaderboardManager leaderboardManager;
+    public InventoryManager inventoryManager;
 
     public static GameController instance = null;
     public GameObject gameOverObject;
@@ -64,6 +65,8 @@ public class GameController : MonoBehaviour
             leaderboardManager.currentScore = score;
             leaderboardManager.OnButtonSendLeaderboard();
         }
+
+        inventoryManager.OnButtonSetVirtualCurrencies(score);
     }
 
     public void Scored(int value)
