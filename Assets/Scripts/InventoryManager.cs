@@ -8,10 +8,13 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI Msg, coinTMP, inventoryTMP;
+    public bool cheapItemBool = false, expensiveItemBool = false;
 
     private void Start()
     {
         UpdateCoinTMPAmount();
+
+        GetScoreBoostersItemBool();
     }
 
     //Display in console and message box
@@ -148,6 +151,22 @@ public class InventoryManager : MonoBehaviour
         return price;
     }
 
+    public void GetScoreBoostersItemBool()
+    {
+        var UserInv = new GetUserInventoryRequest();
+
+        PlayFabClientAPI.GetUserInventory(UserInv, GetScoreBoostersItemBoolResult, OnError);
+    }
+
+    void GetScoreBoostersItemBoolResult(GetUserInventoryResult r)
+    {
+        List<ItemInstance> ii = r.Inventory;
+        foreach (ItemInstance i in ii)
+        {
+            CheckScoreBoosters(i.ItemId);
+        }
+    }
+
     public void GetPlayerInventory()
     {
         var UserInv = new GetUserInventoryRequest();
@@ -235,5 +254,20 @@ public class InventoryManager : MonoBehaviour
         }
 
         return 0;
+    }
+
+    void CheckScoreBoosters(string _itemID)
+    {
+        switch (_itemID)
+        {
+            case "CheapItem":
+                cheapItemBool = true;
+                break;
+            case "ExpensiveItem":
+                expensiveItemBool = true;
+                break;
+        }
+
+        Debug.Log("Checked bool: " + _itemID);
     }
 }

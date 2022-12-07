@@ -642,6 +642,7 @@ MonoBehaviour:
   gameOverObject: {fileID: 1660711555}
   scoreText: {fileID: 1877321016}
   highScoreText: {fileID: 1049733977}
+  gameOverScoreText: {fileID: 1942258457}
   difficultyMax: 10
   isGameOver: 0
   scrollSpeed: -4

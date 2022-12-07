@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI gameOverScoreText;
 
     public int difficultyMax = 5;
 
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour
     public int columnScore = 1;
     private int score = 0;
     private int highestScore = 0;
+    private int additionalScore = 0;
 
     private void Awake()
     {
@@ -59,6 +61,10 @@ public class GameController : MonoBehaviour
     {
         gameOverObject.SetActive(true);
         isGameOver = true;
+
+        LoadItem();
+        score += additionalScore;
+        gameOverScoreText.text = score.ToString();
 
         if (score >= highestScore)
         {
@@ -101,5 +107,22 @@ public class GameController : MonoBehaviour
 
         highestScore = leaderboardManager.highScore;
         highScoreText.text = highestScore.ToString();
+    }
+
+    private void LoadItem()
+    {
+        additionalScore = 0;
+
+        if (inventoryManager.cheapItemBool == true)
+        {
+            additionalScore += 1;
+        }
+
+        if (inventoryManager.expensiveItemBool == true)
+        {
+            additionalScore += 5;
+        }
+
+        Debug.Log("additionalScore: " + additionalScore);
     }
 }
