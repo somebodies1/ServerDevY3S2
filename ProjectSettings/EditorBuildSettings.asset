@@ -6,19 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/LoginScn.unity
+    path: Assets/Scenes/Practical/LoginScn.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/Practical/GameScene.unity
     guid: 6639fc7c288cc0641bbb2c3c52dd0779
   - enabled: 1
     path: Assets/Scenes/Assignment1/LoginScene.unity
     guid: 32b4a7c299195674c85005b19b82d329
   - enabled: 1
-    path: Assets/Scenes/SkillScene.unity
+    path: Assets/Scenes/Practical/SkillScene.unity
     guid: 308f4b61e2f95c2499e3b319682d3806
   - enabled: 1
-    path: Assets/Scenes/InventoryScene.unity
+    path: Assets/Scenes/Practical/InventoryScene.unity
     guid: 1b51d4325a0065e4183f36c61f28027f
   - enabled: 1
     path: Assets/Scenes/Assignment1/Landing.unity
@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Assignment1/Game.unity
     guid: 325de30d16b8f924988710d52ef60856
   - enabled: 1
-    path: Assets/Scenes/FriendScene.unity
+    path: Assets/Scenes/Practical/FriendScene.unity
     guid: fca8ef5b14aca204e935823762d25b68
   - enabled: 1
     path: Assets/Scenes/Assignment1/LoggedInScene.unity
