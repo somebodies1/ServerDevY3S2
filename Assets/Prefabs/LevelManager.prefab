@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7762881453172766658}
   - component: {fileID: 7762881453172766657}
+  - component: {fileID: -2674803246547549926}
   m_Layer: 0
-  m_Name: XPManager
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7762881453172766657
 MonoBehaviour:
@@ -44,4 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dbcfd435f666a94cb94686646efbe33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelDataScript: {fileID: -2674803246547549926}
   xpTMP: {fileID: 0}
+--- !u!114 &-2674803246547549926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7762881453172766656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db501d95ef36e1d4a93c1eeea9dc8756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpDataScript: {fileID: 7762881453172766657}
+  lvlTMP: {fileID: 0}

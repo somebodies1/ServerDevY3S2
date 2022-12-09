@@ -16,8 +16,10 @@ public class XP
 
 public class XPData : MonoBehaviour
 {
+    public LevelData levelDataScript;
+
     [SerializeField] TMP_Text xpTMP;
-    public static XP clientXP;
+    public static XP clientXP = new XP(0);
 
     private void Start()
     {
@@ -27,13 +29,15 @@ public class XPData : MonoBehaviour
 
     public XP ReturnClass()
     {
-        return new XP(int.Parse(xpTMP.text));
+        return clientXP;
     }
 
     public void AddToXP(int _xpAmt)
     {
         clientXP.xpAmt += _xpAmt;
         SendJSON();
+
+        levelDataScript.AddXPToClientLevel(clientXP.xpAmt);
         SetUI();
     }
 
@@ -50,7 +54,10 @@ public class XPData : MonoBehaviour
     public void UpdateXPTMP()
     {
         if (xpTMP)
-            xpTMP.text = clientXP.xpAmt.ToString();
+        {
+            xpTMP.text = "XP: ";
+            xpTMP.text += clientXP.xpAmt.ToString();
+        }
     }
 
     public void SendJSON()
@@ -69,28 +76,6 @@ public class XPData : MonoBehaviour
 
         PlayFabClientAPI.UpdateUserData(req, result => Debug.Log("Data sent success!"), OnError);
     }
-
-    //public void SendJSON()
-    //{
-    //    List<Skill> skillList = new List<Skill>();
-
-    //    foreach (var item in SkillBoxes)
-    //        skillList.Add(item.ReturnClass());
-
-    //    string stringListAsJson = JsonUtility.ToJson(new JSListWrapper<Skill>(skillList));
-    //    Debug.Log("JSON data prepared: " + stringListAsJson);
-
-    //    var req = new UpdateUserDataRequest
-    //    {
-    //        //Package as dictionary item
-    //        Data = new Dictionary<string, string>
-    //        {
-    //            {"Skills", stringListAsJson}
-    //        }
-    //    };
-
-    //    PlayFabClientAPI.UpdateUserData(req, result => Debug.Log("Data sent success!"), OnError);
-    //}
 
     public void LoadJSON()
     {
