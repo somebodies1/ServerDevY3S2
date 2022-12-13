@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public LeaderboardManager leaderboardManager;
     public InventoryManager inventoryManager;
+    public XPData xpDataScript;
 
     public static GameController instance = null;
     public GameObject gameOverObject;
@@ -60,18 +61,22 @@ public class GameController : MonoBehaviour
         gameOverObject.SetActive(true);
         isGameOver = true;
 
+        //Use any score boosters
         LoadItem();
-
         if (score >= 1)
             score += additionalScore;
 
         gameOverScoreText.text = score.ToString();
 
+        //Update leaderboard with new highscore
         if (score >= highestScore)
         {
             leaderboardManager.currentScore = score;
             leaderboardManager.OnButtonSendLeaderboard();
         }
+
+        //Add XP
+        xpDataScript.AddToXP(score);
 
         inventoryManager.OnButtonSetVirtualCurrencies(score);
     }
