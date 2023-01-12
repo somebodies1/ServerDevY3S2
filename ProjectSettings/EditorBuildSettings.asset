@@ -6,30 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Practical/LoginScn.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/Practical/GameScene.unity
-    guid: 6639fc7c288cc0641bbb2c3c52dd0779
-  - enabled: 1
     path: Assets/Scenes/Assignment1/LoginScene.unity
     guid: 32b4a7c299195674c85005b19b82d329
-  - enabled: 1
-    path: Assets/Scenes/Practical/SkillScene.unity
-    guid: 308f4b61e2f95c2499e3b319682d3806
-  - enabled: 1
-    path: Assets/Scenes/Practical/InventoryScene.unity
-    guid: 1b51d4325a0065e4183f36c61f28027f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Assignment1/Landing.unity
     guid: a4caf696d8aea8d4888bc1bc07ff2445
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Assignment1/Game.unity
     guid: 325de30d16b8f924988710d52ef60856
+  - enabled: 0
+    path: Assets/Scenes/Assignment1/LoggedInScene.unity
+    guid: 1aa795be69e01c448a943f9e9f916e74
+  - enabled: 1
+    path: Assets/Scenes/Assignment2/LoginScene.unity
+    guid: 4996f25c5f04cbb43b441b7f8a208f0b
+  - enabled: 1
+    path: Assets/Scenes/Assignment2/LoggedInScene.unity
+    guid: 9b2ca140475e1114bac614d5c43ea76a
+  - enabled: 1
+    path: Assets/Scenes/Assignment2/Landing.unity
+    guid: e1835b1730bef5141b094dfa0ed3c4fa
+  - enabled: 1
+    path: Assets/Scenes/Assignment2/Game.unity
+    guid: 09d6efe04f88df0489aa44dc679f0973
   - enabled: 1
     path: Assets/Scenes/Practical/FriendScene.unity
     guid: fca8ef5b14aca204e935823762d25b68
-  - enabled: 1
-    path: Assets/Scenes/Assignment1/LoggedInScene.unity
-    guid: 1aa795be69e01c448a943f9e9f916e74
   m_configObjects: {}
