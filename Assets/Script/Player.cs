@@ -9,6 +9,7 @@ public class Player : MonoBehaviourPunCallbacks
 {
     public LeaderboardManager leaderboardManager;
     public InventoryManager inventoryManager;
+    public FriendManager friendManager;
 
     private float moveSpeed = 7.0f;
     private bool canMove = true;
@@ -55,6 +56,10 @@ public class Player : MonoBehaviourPunCallbacks
         currentText = GameObject.FindGameObjectWithTag("CurrentText").GetComponent<TextMeshProUGUI>();
         eButton = GameObject.Find("EButton");
 
+        leaderboardManager = GameObject.Find("LeaderboardManager").GetComponent<LeaderboardManager>();
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        friendManager = GameObject.Find("FriendManager").GetComponent<FriendManager>();
+
         canMove = true;
         eButton.SetActive(false);
     }
@@ -76,15 +81,19 @@ public class Player : MonoBehaviourPunCallbacks
                     {
                         case CONTACT_TYPE.SHOP:
                             shopPanel.GetComponent<ShopController>().OpenPanel(ClosePanel);
+
                             inventoryManager.UpdateCoinTMPAmount();
                             break;
 
                         case CONTACT_TYPE.FRIEND:
                             friendsPanel.GetComponent<FriendsController>().OpenPanel(ClosePanel);
-                                  break;
+
+                            friendManager.UpdateFriendsPanel();
+                            break;
 
                         case CONTACT_TYPE.LEADERBOARD:
                             leaderPanel.GetComponent<LeaderboardController>().OpenPanel(ClosePanel);
+
                             leaderboardManager.OnButtonGetLeaderboard();
                             break;
 

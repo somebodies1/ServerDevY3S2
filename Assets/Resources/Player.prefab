@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leaderboardManager: {fileID: 0}
   inventoryManager: {fileID: 0}
+  friendManager: {fileID: 0}
   isOffline: 0
 --- !u!95 &8875753840370992055
 Animator:

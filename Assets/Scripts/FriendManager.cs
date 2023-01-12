@@ -11,9 +11,43 @@ public class FriendManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI friendListText, leaderboardText;
     [SerializeField] TMP_InputField addFriendInput, removeFriendInput;
 
+    public void UpdateFriendsPanel()
+    {
+        GetFriends();
+        OnGetFriendLB();
+    }
+
+    void RemoveFriendByName(string _friendName)
+    {
+        PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest
+        {
+            IncludeSteamFriends = false,
+            IncludeFacebookFriends = false,
+            XboxToken = null
+        },
+        result =>
+        {
+            _friends = result.Friends;
+            RemoveFriendByNameCheck(_friends, _friendName);
+        },
+        DisplayPlayFabError
+        );
+    }
+
+    void RemoveFriendByNameCheck(List<FriendInfo> _friendInfoList, string _friendName)
+    {
+        for (int i = 0; i < _friendInfoList.Count; ++i)
+        {
+            if (_friendInfoList[i].TitleDisplayName == _friendName)
+            {
+                RemoveFriend(_friendInfoList[i].FriendPlayFabId);
+            }
+        }
+    }
+
     void DisplayFriends(List<FriendInfo> friendsCache)
     {
-        friendListText.text = "";
+        friendListText.text = "Friends: \n";
 
         friendsCache.ForEach(f =>
         {
@@ -77,10 +111,13 @@ public class FriendManager : MonoBehaviour
         }
 
         //Execute request and update friends when we are done
-        PlayFabClientAPI.AddFriend(request, result =>
-        {
-            Debug.Log("Friend added succesfully!");
-        }, DisplayPlayFabError);
+        PlayFabClientAPI.AddFriend(request, AddFriendResult, DisplayPlayFabError);
+    }
+
+    void AddFriendResult(AddFriendResult r)
+    {
+        UpdateFriendsPanel();
+        Debug.Log("Friend added succesfully!");
     }
 
     //Add friend base on display name
@@ -106,7 +143,8 @@ public class FriendManager : MonoBehaviour
 
     public void OnUnFriend()
     {
-        RemoveFriend(removeFriendInput.text);
+        //RemoveFriend(removeFriendInput.text);
+        RemoveFriendByName(removeFriendInput.text);
     }
 
     void RemoveFriend(string pfid)
@@ -116,10 +154,13 @@ public class FriendManager : MonoBehaviour
             FriendPlayFabId = pfid
         };
 
-        PlayFabClientAPI.RemoveFriend(req, 
-            result => 
-            { Debug.Log("Unfriend!"); }, 
-            DisplayPlayFabError);
+        PlayFabClientAPI.RemoveFriend(req, RemoveFriendResult, DisplayPlayFabError);
+    }
+
+    void RemoveFriendResult(RemoveFriendResult r)
+    {
+        UpdateFriendsPanel();
+        Debug.Log("Unfriend!");
     }
 
     public void OnGetFriendLB()
@@ -128,10 +169,13 @@ public class FriendManager : MonoBehaviour
             new GetFriendLeaderboardRequest { StatisticName = "Highscore", MaxResultsCount = 10 },
             r =>
             {
-                leaderboardText.text = "Friends LB \n";
+                leaderboardText.text = "Friends Leaderboard: \n";
                 foreach (var item in r.Leaderboard)
                 {
-                    string onerow = item.Position + "/" + item.PlayFabId + "/" + item.DisplayName + "/" + item.StatValue + "\n";
+                    //string onerow = item.Position + "/" + item.PlayFabId + "/" + item.DisplayName + "/" + item.StatValue + "\n";
+                    //Debug.Log(onerow);
+                    //leaderboardText.text += onerow;
+                    string onerow = (item.Position + 1) + " - " + item.DisplayName + " - " + item.StatValue + "\n";
                     Debug.Log(onerow);
                     leaderboardText.text += onerow;
                 }
@@ -144,4 +188,29 @@ public class FriendManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
+
+    //public void OnButtonGetLeaderboard()
+    //{
+    //    var lbreq = new GetLeaderboardRequest
+    //    {
+    //        StatisticName = "Highscore", //Playfab leaderboard name
+    //        StartPosition = 0,
+    //        MaxResultsCount = 10
+    //    };
+
+    //    PlayFabClientAPI.GetLeaderboard(lbreq, OnLeaderboardGet, OnError);
+    //}
+
+    //void OnLeaderboardGet(GetLeaderboardResult r)
+    //{
+    //    string LeaderboardStr = "Leaderboard\n";
+
+    //    foreach (var item in r.Leaderboard)
+    //    {
+    //        string onerow = (item.Position + 1) + " - " + item.DisplayName + " - " + item.StatValue + "\n";
+    //        LeaderboardStr += onerow; //Combine all into one string
+    //    }
+
+    //    leaderboardText.text = LeaderboardStr;
+    //}
 }
