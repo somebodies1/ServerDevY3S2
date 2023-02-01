@@ -7,8 +7,16 @@ using PlayFab.ClientModels;
 
 public class PlayFabUserMgTMP : MonoBehaviour
 {
+    public static string entityKeyID;
+    public static string entityKeyType;
+
     [SerializeField] TMP_InputField userEmail, userPassword, userPasswordMatch, userName, currentScore, displayName, XP, level;
     [SerializeField] TextMeshProUGUI Msg;
+
+    private void Start()
+    {
+        Debug.Log("EntKey: " + entityKeyID);
+    }
 
     //to display in console and messagebox
     void UpdateMsg(string msg)
@@ -75,6 +83,9 @@ public class PlayFabUserMgTMP : MonoBehaviour
 
     void OnLoginSuccess(LoginResult r)
     {
+        entityKeyID = r.EntityToken.Entity.Id;
+        entityKeyType = r.EntityToken.Entity.Type;
+
         UpdateMsg("Login success!" + r.PlayFabId + r.InfoResultPayload.PlayerProfile.DisplayName);
         GoToScene("LoggedInScene");
     }
@@ -270,5 +281,15 @@ public class PlayFabUserMgTMP : MonoBehaviour
     {
         UpdateMsg("Logged in as Guest");
         GoToScene("LoggedInScene");
+    }
+
+    public string GetEntityKeyID()
+    {
+        return entityKeyID;
+    }
+
+    public string GetEntityKeyType()
+    {
+        return entityKeyType;
     }
 }
